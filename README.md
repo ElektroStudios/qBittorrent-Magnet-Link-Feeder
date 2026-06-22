@@ -1,11 +1,8 @@
 <!-- Common Project Tags:
 command-line 
+command-line-interface 
 console-applications 
-desktop-app 
-desktop-application 
 dotnet 
-dotnet-core 
-netcore 
 netframework 
 netframework48 
 tool 
@@ -14,10 +11,18 @@ vbnet
 visualstudio 
 windows 
 windows-app 
-windows-application 
-windows-applications 
-windows-forms 
-winforms 
+qBittorrent 
+torrent-cli 
+torrents 
+torrenting 
+torrent-automation 
+magnet-uri 
+magnet-link 
+magnet-links 
+magnetlink 
+magnetlinks 
+torrentlink 
+torrent-link 
  -->
 
 # qBittorrent Magnet Link Feeder
@@ -60,9 +65,11 @@ To add support for other languages, the only requirement is to add the localized
 
 ## 📝 Requirements
 
-
-- [qBitTorrent](https://www.qbittorrent.org/download)
 - Microsoft Windows OS.
+- [qBitTorrent](https://www.qbittorrent.org/download)
+
+- Having this checkbox checked in qBitTorrent: 
+  ![screenshot](/Images/requisite1.png)
 
 ## 🤖 Getting Started
 
