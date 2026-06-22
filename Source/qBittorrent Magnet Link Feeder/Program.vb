@@ -89,6 +89,7 @@ Public Module Program
     ''' <para></para>
     ''' The first argument (args(0)) is expected to be the path to the source directory containing text files to process.
     ''' </param>
+    <DebuggerStepperBoundary>
     Public Sub Main(args As String())
 
         Thread.CurrentThread.CurrentCulture = Program.CultureInfoEnUs
@@ -197,10 +198,11 @@ Public Module Program
     ''' <param name="filePath">
     ''' Full path of the text file to process.
     ''' </param>
+    <DebuggerStepThrough>
     Private Sub ProcessTextFile(filePath As String)
 
         Dim fileNameWithoutExt As String = Path.GetFileNameWithoutExtension(filePath)
-        Dim fileContent As String = File.ReadAllText(filePath)
+        Dim fileContent As String = File.ReadAllText(filePath, Program.TextEncoding)
 
         If String.IsNullOrWhiteSpace(fileContent) Then
             Exit Sub
@@ -272,6 +274,7 @@ Public Module Program
     ''' <returns>
     ''' List of window handles corresponding to detected dialogs.
     ''' </returns>
+    <DebuggerStepThrough>
     Private Function WaitForDialogs(processId As Integer,
                                     expectedDialogsCount As Integer,
                            Optional timeout As TimeSpan = Nothing,
@@ -352,6 +355,7 @@ Public Module Program
     ''' <param name="expectedCount">
     ''' Number of dialogs expected to process.
     ''' </param>
+    <DebuggerStepThrough>
     Private Sub ProcessDialogs(processId As Integer,
                                fileNameWithoutExt As String,
                                expectedCount As Integer)
@@ -387,6 +391,7 @@ Public Module Program
     ''' <returns>
     ''' Handle of the next available dialog or IntPtr.Zero if none found.
     ''' </returns>
+    <DebuggerStepThrough>
     Private Function GetNextDialog(processId As Integer,
                                    processed As HashSet(Of IntPtr)) As IntPtr
 
@@ -415,6 +420,7 @@ Public Module Program
     ''' <param name="index">
     ''' Dialog index for subfolder creation.
     ''' </param>
+    <DebuggerStepThrough>
     Private Sub AutomateDialog(hwnd As IntPtr, baseName As String, index As Integer)
 
         ' Ensure Caps Lock is disabled before automation
@@ -483,6 +489,7 @@ Public Module Program
     ''' <returns>
     ''' List of window handles matching torrent dialogs.
     ''' </returns>
+    <DebuggerStepThrough>
     Private Function GetTargetDialogs(TargetProcessId As Integer) As List(Of IntPtr)
 
         Dim foundHandles As New List(Of IntPtr)()
@@ -527,6 +534,7 @@ Public Module Program
     ''' <returns>
     ''' Number of dialogs handled.
     ''' </returns>
+    <DebuggerStepThrough>
     Private Function HandleAlreadyPresentDialogs(processId As Integer) As Integer
 
         Dim handled As Integer = 0
@@ -584,6 +592,7 @@ Public Module Program
     ''' <param name="delayAfterFocusMs">
     ''' Delay after focusing before input starts.
     ''' </param>
+    <DebuggerStepThrough>
     Public Sub ExecuteSendKeysBatchSafely(targetWindowHandle As IntPtr,
                                           actions As IEnumerable(Of (Keys As String, delayAfterSendMs As Integer)),
                                  Optional focusTimeoutMs As Integer = 5000,
@@ -634,6 +643,7 @@ Public Module Program
     ''' <param name="delayAfterFocusMs">
     ''' Delay after focus is set.
     ''' </param>
+    <DebuggerStepThrough>
     Public Sub EnsureWindowReady(targetWindowHandle As IntPtr,
                         Optional focusTimeoutMs As Integer = 5000,
                         Optional delayAfterFocusMs As Integer = 300)
@@ -676,6 +686,7 @@ Public Module Program
     ''' <param name="focusTimeoutMs">
     ''' Maximum time allowed to set foreground focus.
     ''' </param>
+    <DebuggerStepThrough>
     Private Sub ForceWindowToForeground(targetWindowHandle As IntPtr, focusTimeoutMs As Integer)
 
         If targetWindowHandle = IntPtr.Zero Then
@@ -727,6 +738,7 @@ Public Module Program
     ''' <returns>
     ''' Number of detected magnet URLs.
     ''' </returns>
+    <DebuggerStepThrough>
     Private Function CountMagnetLinksFromClipboard() As Integer
 
         Dim clipboardText As String = Clipboard.GetText()
@@ -761,6 +773,7 @@ Public Module Program
     ''' <returns>
     ''' True if Caps Lock is active; otherwise False.
     ''' </returns>
+    <DebuggerStepThrough>
     Private Function IsCapsLockOn() As Boolean
 
         Return (NativeMethods.GetKeyState(Win32.VK_CAPITAL) And 1) <> 0
@@ -773,6 +786,7 @@ Public Module Program
     ''' <param name="enabled">
     ''' Desired Caps Lock state.
     ''' </param>
+    <DebuggerStepThrough>
     Private Sub SetCapsLock(enabled As Boolean)
 
         Dim current As Boolean = Program.IsCapsLockOn()
@@ -822,6 +836,7 @@ Public Module Program
     ''' After displaying the message (if provided), the method waits for the user to press any key
     ''' before terminating the application. This allows the user to see the output in the console window.
     ''' </remarks>
+    <DebuggerStepThrough>
     Private Sub ExitWithMessage(message As String, exitCode As Integer, foreColor As ConsoleColor)
 
         If Not String.IsNullOrEmpty(message) Then
