@@ -20,19 +20,29 @@ windows-forms
 winforms 
  -->
 
-# PROJECT NAME
+# qBittorrent Magnet Link Feeder
 
-### PROJECT DESCRIPTION
+### CLI utility to automate adding magnet links directly to the qBittorrent user interface.
 
 ------------------
 
 ## 👋 Introduction
 
-INTRODUCTION TEXT
+**qBittorrent Magnet Link Feeder** is a Command-Line Interface (CLI) automation tool designed to streamline the bulk import of magnet links into qBittorrent. 
+
+The application accepts a target directory path as a command-line argument, scanning its root for `.txt` files containing magnet links. It then automates the process of importing these links into the qBittorrent user interface and automatically handles the confirmation dialogs. To keep your workspace clean, it organizes all active downloads into structured folders named after the source text file and the torrent index, completely eliminating naming conflicts.
 
 ## 👌 Features
 
-FEATURES TEXT
+- Automatically scans, detects, and processes `.txt` files located in the root of the specified directory path.
+
+- Automatically structures your downloads into dedicated folders using the source `.txt` filename combined with a torrent index to prevent overwriting files.
+
+- Employs precise `SendKeys` simulation to interact with qBittorrent dialogs without requiring manual intervention.
+
+- Safely blocks user keyboard and mouse input during active automation sequences to guarantee flawless execution and prevent accidental misclicks.
+
+- Designed with safety in mind; you can instantly break the input block and interrupt execution at any time by pressing `CTRL+ALT+DEL`.
 
 ## 🖼️ Screenshots
 
@@ -40,18 +50,17 @@ FEATURES TEXT
 
 ## 🎦 Videos
 
-<!-- Download a recorded video by clicking [here](/Video/video.mp4) -->
-
-<!-- See a recorded video by clicking on the following button:
-[![PROJECT_NAME DEMO VIDEO](Images/demo_video.jpg)](https://www.youtube.com/watch?v=XXXXXXXXX)  -->
+[qBittorrent-Magnet-Link-Feeder DEMO VIDEO](xxxxxxxxxxxxxxxx)
 
 ## 📝 Requirements
 
+
+- [qBitTorrent](https://www.qbittorrent.org/download)
 - Microsoft Windows OS.
 
 ## 🤖 Getting Started
 
-Download the latest compilation by clicking [here](https://github.com/ElektroStudios/PROJECT_NAME/releases/latest).
+Download the latest release by clicking [here](https://github.com/ElektroStudios/qBittorrent-Magnet-Link-Feeder/releases/latest) and start using it.
 
 ## 🔄 Change Log
 
@@ -71,7 +80,7 @@ This Work has no affiliation, approval or endorsement by the author(s) of the th
 
 ## 💪 Contributing
 
-Your contribution is highly appreciated!. If you have any ideas, suggestions, or encounter issues, feel free to open an issue by clicking [here](https://github.com/ElektroStudios/PROJECT_NAME/issues/new/choose). 
+Your contribution is highly appreciated!. If you have any ideas, suggestions, or encounter issues, feel free to open an issue by clicking [here](https://github.com/ElektroStudios/qBittorrent-Magnet-Link-Feeder/issues/new/choose). 
 
 Your input helps make this Work better for everyone. Thank you for your support! 🚀
 
