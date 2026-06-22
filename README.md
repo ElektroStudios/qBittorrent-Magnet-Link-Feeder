@@ -27,9 +27,13 @@ torrent-link
 
 # qBittorrent Magnet Link Feeder
 
+**THIS REPOSITORY IS UNDER CONSTRUCTION**
+
 ### CLI utility to automate adding magnet links directly to the qBittorrent user interface.
 
 ------------------
+
+**THIS REPOSITORY IS UNDER CONSTRUCTION**
 
 ## 👋 Introduction
 
