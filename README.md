@@ -68,7 +68,8 @@ To add support for other languages, the only requirement is to add the localized
 - Microsoft Windows OS.
 - [qBitTorrent](https://www.qbittorrent.org/download)
 
-- Having this checkbox checked in qBitTorrent: 
+- Having the following checkbox checked in qBitTorrent: 
+
   ![screenshot](/Images/requisite1.png)
 
 ## 🤖 Getting Started
