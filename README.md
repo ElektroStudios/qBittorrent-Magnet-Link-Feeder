@@ -23,23 +23,32 @@ magnetlink
 magnetlinks 
 torrentlink 
 torrent-link 
+command-line-tool 
+command-line-tools 
+qbittorent 
+qbittorent-cli 
+torrenting-windows-desktop 
+torrent-file-management 
+qbittorrent-automation 
  -->
 
 # qBittorrent Magnet Link Feeder
 
-**THIS REPOSITORY IS UNDER CONSTRUCTION**
+### Command-line utility that automates importing magnet link lists directly into the qBittorrent UI
 
-### CLI utility to automate adding magnet links directly to the qBittorrent user interface.
+> [!NOTE]
+> Tested only with qBittorrent version 5.0.x.
 
 ------------------
-
-**THIS REPOSITORY IS UNDER CONSTRUCTION**
 
 ## 👋 Introduction
 
 **qBittorrent Magnet Link Feeder** is a Command-Line Interface (CLI) automation tool designed to streamline the bulk import of magnet links into qBittorrent. 
 
 The application accepts a target directory path as a command-line argument, scanning its root for `.txt` files containing magnet links. It then automates the process of importing these links into the qBittorrent user interface and automatically handles the confirmation dialogs. To keep your workspace clean, it organizes all active downloads into structured folders named after the source text file and the torrent index, completely eliminating naming conflicts.
+
+> 💡 **The Perfect Companion Tool**  
+> This application serves as the ideal companion for [BT4G-Torrent-Magnet-Scraper](https://github.com/ElektroStudios/BT4G-Torrent-Magnet-Scraper). While the scraper automates the  harvesting of magnet links into text files, **qBittorrent Magnet Link Feeder** takes over the heavy lifting of importing and organizing those generated magnet lists directly into your qBittorrent client seamlessly.
 
 ## 👌 Features
 
@@ -55,9 +64,19 @@ The application accepts a target directory path as a command-line argument, scan
 
 ## ⚠️ Limitations
 
+> [!NOTE]
+> Tested only with qBittorrent version 5.0.x.
+
 The UI automation relies on explicit window title strings to detect and automatically dismiss duplicate torrent dialogs. Currently, **only English and Spanish** qBitTorrent user interfaces are supported. If your qBittorrent client is configured in any other language and a duplicate dialog window appear, the automation will fail to recognize the window and it will result in other issues.
 
 To add support for other languages, the only requirement is to add the localized window title to `TORRENT_ALREADY_PRESENT_WINDOW_TITLES` collection in the source code, then compile the project with your changes using [Visual Studio](https://visualstudio.microsoft.com/downloads/).
+
+### 🌐 Adding Multilingual Support
+
+If you are a developer and want to add support for other languages, the process is straightforward:
+
+1. Add the localized window title to the `TORRENT_ALREADY_PRESENT_WINDOW_TITLES` collection in the source code.
+2. Recompile the project with your changes using [Visual Studio](https://visualstudio.microsoft.com/downloads/).
 
 ## 🖼️ Screenshots
 
@@ -65,7 +84,7 @@ To add support for other languages, the only requirement is to add the localized
 
 ## 🎦 Videos
 
-[qBittorrent-Magnet-Link-Feeder DEMO VIDEO](xxxxxxxxxxxxxxxx)
+[qBittorrent-Magnet-Link-Feeder DEMO VIDEO](https://github.com/user-attachments/assets/b6c617a3-2d6a-4bfa-9306-e98e106ef38a)
 
 ## 📝 Requirements
 
