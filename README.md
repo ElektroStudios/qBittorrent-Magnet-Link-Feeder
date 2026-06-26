@@ -66,8 +66,6 @@ The application accepts a target directory path as a command-line argument, scan
 
 The UI automation relies on explicit window title strings to detect and automatically dismiss duplicate torrent dialogs. Currently, **only English and Spanish** qBitTorrent user interfaces are supported. If your qBittorrent client is configured in any other language and a duplicate dialog window appear, the automation will fail to recognize the window and it will result in other issues.
 
-To add support for other languages, the only requirement is to add the localized window title to `TORRENT_ALREADY_PRESENT_WINDOW_TITLES` collection in the source code, then compile the project with your changes using [Visual Studio](https://visualstudio.microsoft.com/downloads/).
-
 ### 🌐 Adding Multilingual Support
 
 If you are a developer and want to add support for other languages, the process is straightforward:
