@@ -100,6 +100,9 @@ If you are a developer and want to add support for other languages, the process 
 
 Download the latest release by clicking [here](https://github.com/ElektroStudios/qBittorrent-Magnet-Link-Feeder/releases/latest) and start using it.
 
+> [!NOTE]
+> You can press `Ctrl + Alt + Del` at any time during execution to restore mouse and keyboar dinput.
+
 ## 🔄 Change Log
 
 Explore the complete list of changes, bug fixes, and improvements across different releases by clicking [here](/Docs/CHANGELOG.md).
