@@ -77,7 +77,9 @@ If you are a developer and want to add support for other languages, the process 
 
 ## 🖼️ Screenshots
 
-![screenshot](/Images/screenshot1.png)
+![screenshot1](/Images/screenshot1.png)
+
+![screenshot2](/Images/screenshot2.png)
 
 ## 🎦 Videos
 
