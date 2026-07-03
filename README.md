@@ -39,10 +39,10 @@ qbittorrent-automation
 
 ### Command-line utility that automates importing magnet link lists directly into the qBittorrent UI.
 
+</div>
+
 > [!IMPORTANT]
 > Tested only with qBittorrent version 5.0.x.
-
-</div>
 
 ------------------
 
