@@ -31,13 +31,18 @@ torrenting-windows-desktop
 torrent-file-management 
 qbittorrent-automation 
  -->
-
-# qBittorrent Magnet Link Feeder
+ 
+<div align="center">
+  <img src="/Images/App.ico" width="80" alt="qBittorrent Magnet Link Feeder Logo">
+  
+  <h1>qBittorrent Magnet Link Feeder</h1>
 
 ### Command-line utility that automates importing magnet link lists directly into the qBittorrent UI.
 
 > [!IMPORTANT]
 > Tested only with qBittorrent version 5.0.x.
+
+</div>
 
 ------------------
 
