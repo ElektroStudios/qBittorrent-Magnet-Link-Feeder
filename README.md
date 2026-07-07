@@ -125,8 +125,11 @@ If you are a developer and want to add support for other languages, the process 
 ## 🚀 Getting Started
 
 1. Navigate to the **[Releases page](https://github.com/ElektroStudios/qBittorrent-Magnet-Link-Feeder/releases/latest)**.
-2. Download the latest `.zip` archive and extract its contents to your preferred directory.
-3. Run the executable file to launch the application.
+2. Download the latest `.zip` archive or the `.exe` setup installer, depending on your preference.
+3. If you downloaded the `.zip` archive, extract its contents to your preferred directory.
+   <br> 
+   If you downloaded the `.exe` file, run it and follow the installation wizard.
+4. Run the executable file to launch the application.
 
 > [!TIP]
 > You can press `Ctrl + Alt + Del` at any time during program execution to restore mouse and keyboard input.
