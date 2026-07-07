@@ -4,7 +4,7 @@
 env:
   SOLUTION_NAME: "qBittorrent Magnet Link Feeder"
   SOLUTION_EXT:  "slnx"
-  SONAR_PROJECT_KEY:  "ElektroStudios_PROJECT_NAME"
+  SONAR_PROJECT_KEY:  "ElektroStudios_qBittorrent-Magnet-Link-Feeder"
   SONAR_ORGANIZATION: "elektrostudios"
 # ------------------------------------------
 
