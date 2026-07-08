@@ -73,6 +73,8 @@ qbittorrent-automation
     <a href="https://en.wikipedia.org/wiki/Spanish_Empire"><img src="https://img.shields.io/badge/Made_in-Spain_%F0%9F%87%AA%F0%9F%87%B8-AA151B?style=flat" alt="Made in Spain"></a>
 </p>
 
+------------------
+
 ## 👋 Introduction
 
 **qBittorrent Magnet Link Feeder** is a Command-Line Interface (CLI) automation tool designed to streamline the bulk import of magnet links into qBittorrent. 
