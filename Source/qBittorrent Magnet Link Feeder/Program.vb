@@ -72,6 +72,7 @@ Public Module Program
         Console.Title = consoleTitle
 #End If
         Program.WriteColoredLine($" {consoleTitle}", ConsoleColor.Cyan)
+        Program.WriteColoredLine($" {AppGlobals.GitHUB_Repository_URL}", ConsoleColor.Cyan)
         Console.WriteLine("╭───────────────────────────────────────────────────────────────────────────────────────╮")
         Console.WriteLine("│ Purpose:                                                                              │")
         Console.WriteLine("│   This application automates importing magnet links from .txt files into qBittorrent, │")

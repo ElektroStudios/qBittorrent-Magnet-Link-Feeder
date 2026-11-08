@@ -15,6 +15,13 @@ Imports System.Collections.Generic
 Friend Module AppGlobals
 
     ''' <summary>
+    ''' The URL of the GitHub repository for this application.
+    ''' <para></para>
+    ''' Used for linking to the project page in the application UI.
+    ''' </summary>
+    Friend Const GitHUB_Repository_URL As String = "https://github.com/ElektroStudios/qBittorrent-Magnet-Link-Feeder"
+
+    ''' <summary>
     ''' Win32 class name used by qBittorrent Qt window instances.
     ''' <para></para>
     ''' This value is used to identify and filter valid qBittorrent dialog windows.
