@@ -1,6 +1,7 @@
 ﻿Imports System.Resources
 Imports System
 Imports System.Reflection
+Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following
@@ -29,6 +30,9 @@ Imports System.Runtime.InteropServices
 '      Revision
 '
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.1.0.0")>
+<Assembly: AssemblyFileVersion("1.1.0.0")>
 <Assembly: NeutralResourcesLanguage("en")>
+
+' Exposes Friend members to the unit test project.
+<Assembly: InternalsVisibleTo("qBittorrent_Magnet_Link_Feeder.Tests")>

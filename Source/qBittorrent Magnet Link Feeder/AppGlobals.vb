@@ -40,7 +40,7 @@ Friend Module AppGlobals
     ''' <para></para>
     ''' Used for parsing clipboard content and detecting torrent magnet entries.
     ''' </summary>
-    Friend Const MAGET_LINK_PREFIX As String = "magnet:"
+    Friend Const MAGNET_LINK_PREFIX As String = "magnet:"
 
     ''' <summary>
     ''' Localized texts shown in qBittorrent dialogs when a torrent is already present.

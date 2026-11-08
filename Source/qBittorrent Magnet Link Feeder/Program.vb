@@ -71,7 +71,7 @@ Public Module Program
 #If Debug Then
         Console.Title = consoleTitle
 #End If
-        Program.WriteColoredLine(" " & consoleTitle, ConsoleColor.Cyan)
+        Program.WriteColoredLine($" {consoleTitle}", ConsoleColor.Cyan)
         Console.WriteLine("╭───────────────────────────────────────────────────────────────────────────────────────╮")
         Console.WriteLine("│ Purpose:                                                                              │")
         Console.WriteLine("│   This application automates importing magnet links from .txt files into qBittorrent, │")
@@ -92,10 +92,8 @@ Public Module Program
         Console.WriteLine()
 
         If args.Length = 0 Then
-            Dim executableName As String = Process.GetCurrentProcess().ProcessName & ".exe"
-            Dim exitMsg As String = "[ERROR] Source directory path argument is required." &
-                                    Environment.NewLine & Environment.NewLine &
-                                   $"Usage: {executableName} <directory_path>"
+            Dim executableName As String = $"{Process.GetCurrentProcess().ProcessName}.exe"
+            Dim exitMsg As String = $"[ERROR] Source directory path argument is required.{Environment.NewLine}{Environment.NewLine}Usage: {executableName} <directory_path>"
             Program.ExitWithMessage(exitMsg, exitCode:=1, ConsoleColor.Red)
         End If
 
@@ -108,22 +106,19 @@ Public Module Program
 
             sourceDirPath = Path.GetFullPath(sourceDirPath)
 
-            Dim naturalSortOrderComparer As New StringNaturalComparer()
+            Dim sourceFiles As String() = Program.GetSourceTextFiles(sourceDirPath)
 
-            Dim sourceFiles As New SortedSet(Of String)(
-                Directory.GetFiles(sourceDirPath, "*.txt", SearchOption.TopDirectoryOnly), naturalSortOrderComparer)
-
-            If sourceFiles.Count = 0 Then
+            If sourceFiles.Length = 0 Then
                 Dim exitMsg As String = $"[ERROR] No .txt files were found in source directory: {sourceDirPath}"
                 Program.ExitWithMessage(exitMsg, exitCode:=3, ConsoleColor.Red)
             End If
 
-            Dim totalSourceFileCount As Integer = sourceFiles.Count
+            Dim totalSourceFileCount As Integer = sourceFiles.Length
 
             Program.WriteColoredLine($"Source directory path: {sourceDirPath}", ConsoleColor.DarkYellow)
             Program.WriteColoredLine($"Supported files found: {totalSourceFileCount:N0} .txt files", ConsoleColor.DarkYellow)
             Console.WriteLine()
-            Program.WriteColoredLine("Press 'Y' key to start start processing text files, or 'Escape' key to exit...", ConsoleColor.Yellow)
+            Program.WriteColoredLine("Press 'Y' key to start processing text files, or 'Escape' key to exit...", ConsoleColor.Yellow)
             Do
                 Dim keyInfo As ConsoleKeyInfo = Console.ReadKey(intercept:=True)
                 If keyInfo.Key = ConsoleKey.Y Then
@@ -153,6 +148,65 @@ Public Module Program
         End Try
 
     End Sub
+
+#End Region
+
+#Region " Public / Friend Methods "
+
+    ''' <summary>
+    ''' Gets the .txt files located in the root of the specified directory, sorted in natural sort order.
+    ''' </summary>
+    ''' 
+    ''' <remarks>
+    ''' Only files whose extension is exactly ".txt" are returned. 
+    ''' <para></para>
+    ''' Note that <see cref="Directory.EnumerateFiles(String, String, SearchOption)"/> with a "*.txt" search pattern 
+    ''' also matches longer extensions that start with "txt" (e.g. ".txt2", ".txtold"), 
+    ''' and files whose 8.3 short name has a ".TXT" extension, so those files are filtered out.
+    ''' </remarks>
+    ''' 
+    ''' <param name="directoryPath">
+    ''' The directory path to scan (only its root is scanned, not its subdirectories).
+    ''' </param>
+    ''' 
+    ''' <returns>
+    ''' The full paths of the .txt files found, sorted in natural sort order 
+    ''' (e.g. "file2.txt" precedes "file10.txt"). 
+    ''' <para></para>
+    ''' An empty array is returned if no .txt files are found.
+    ''' </returns>
+    ''' 
+    ''' <exception cref="ArgumentNullException">
+    ''' Thrown when <paramref name="directoryPath"/> is <see langword="Nothing"/>.
+    ''' </exception>
+    ''' 
+    ''' <exception cref="DirectoryNotFoundException">
+    ''' Thrown when <paramref name="directoryPath"/> does not exist.
+    ''' </exception>
+    <DebuggerStepThrough>
+    Friend Function GetSourceTextFiles(directoryPath As String) As String()
+
+        If directoryPath Is Nothing Then
+            Throw New ArgumentNullException(NameOf(directoryPath))
+        End If
+
+        If Not Directory.Exists(directoryPath) Then
+            Throw New DirectoryNotFoundException($"The specified directory path does not exist: {directoryPath}")
+        End If
+
+        Dim sourceFiles As New List(Of String)()
+
+        For Each filePath As String In Directory.EnumerateFiles(directoryPath, "*.txt", SearchOption.TopDirectoryOnly)
+            Thread.CurrentThread.Join(0) ' Prevents ContextSwitchDeadlock on long-running iterations.
+
+            If Path.GetExtension(filePath).Equals(".txt", StringComparison.OrdinalIgnoreCase) Then
+                sourceFiles.Add(filePath)
+            End If
+        Next filePath
+
+        sourceFiles.Sort(New StringNaturalComparer())
+        Return sourceFiles.ToArray()
+    End Function
 
 #End Region
 

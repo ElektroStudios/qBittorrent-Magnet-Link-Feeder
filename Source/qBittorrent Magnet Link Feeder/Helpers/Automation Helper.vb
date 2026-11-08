@@ -203,7 +203,7 @@ Friend Module AutomationHelper
     ''' <summary>
     ''' Counts the number of magnet links currently present in the clipboard text.
     ''' </summary>
-    ''' 
+    '''
     ''' <returns>
     ''' Number of detected magnet URLs.
     ''' </returns>
@@ -211,28 +211,58 @@ Friend Module AutomationHelper
     Friend Function CountMagnetLinksFromClipboard() As Integer
 
         Dim clipboardText As String = Clipboard.GetText()
-        If String.IsNullOrWhiteSpace(clipboardText) Then
-            Return 0
+        Return AutomationHelper.CountMagnetLinks(clipboardText)
+    End Function
+
+    ''' <summary>
+    ''' Counts the number of unique magnet links contained in the specified text,
+    ''' mimicking the way qBittorrent parses the "Download from URLs" dialog content.
+    ''' </summary>
+    '''
+    ''' <remarks>
+    ''' qBittorrent splits the dialog text by line feeds, trims each line, ignores empty lines,
+    ''' and discards duplicated (trimmed) URLs before opening a torrent dialog for each remaining URL.
+    ''' <para></para>
+    ''' This function applies the same rules so the resulting count matches
+    ''' the number of torrent dialogs that qBittorrent will actually open.
+    ''' </remarks>
+    '''
+    ''' <param name="text">
+    ''' The text to parse, containing one URL per line.
+    ''' </param>
+    '''
+    ''' <returns>
+    ''' Number of unique magnet URLs found in the text.
+    ''' </returns>
+    '''
+    ''' <exception cref="ArgumentNullException">
+    ''' Thrown when <paramref name="text"/> is <see langword="Nothing"/>.
+    ''' </exception>
+    <DebuggerStepThrough>
+    Friend Function CountMagnetLinks(text As String) As Integer
+
+        If text Is Nothing Then
+            Throw New ArgumentNullException(NameOf(text))
         End If
 
-        Dim lines As String() =
-            clipboardText.Split({ControlChars.CrLf, ControlChars.Lf}, StringSplitOptions.None).
-                          Distinct.ToArray()
+        Dim lines As String() = text.Split({ControlChars.CrLf, ControlChars.Lf}, StringSplitOptions.None)
 
-        Dim magnetUrlsCount As Integer = 0
+        ' qBittorrent's duplicate detection is case-sensitive (QSet<QStringView>), so ordinal comparison is used.
+        Dim uniqueUrls As New HashSet(Of String)(StringComparer.Ordinal)
 
         For Each line As String In lines
 
-            If String.IsNullOrWhiteSpace(line) Then
+            Dim trimmedLine As String = line.Trim()
+            If trimmedLine.Length = 0 Then
                 Continue For
             End If
 
-            If line.StartsWith(AppGlobals.MAGET_LINK_PREFIX, StringComparison.OrdinalIgnoreCase) Then
-                magnetUrlsCount += 1
+            If trimmedLine.StartsWith(AppGlobals.MAGNET_LINK_PREFIX, StringComparison.OrdinalIgnoreCase) Then
+                uniqueUrls.Add(trimmedLine)
             End If
         Next line
 
-        Return magnetUrlsCount
+        Return uniqueUrls.Count
     End Function
 
 #End Region
@@ -311,10 +341,7 @@ Friend Module AutomationHelper
         Loop
 
         ' Normalize and build final target path.
-        Dim normalizedBaseFileName As String = PathHelper.NormalizeBaseFileName(baseName)
-        Dim normalizedBaseDirPath As String = PathHelper.NormalizeBaseDirPath(currentPath)
-
-        Dim targetPath As String = $"{normalizedBaseDirPath}\{normalizedBaseFileName}\{index}"
+        Dim targetPath As String = PathHelper.BuildTargetDirPath(currentPath, baseName, index)
 
         ' Write final path to UI, and confirm the dialog window.
         AutomationHelper.ExecuteSendKeysBatchSafely(hwnd,
